@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<section class="mt-3">
+  <div >
+    <div id="carouselExampleCaptions1" class="carousel slide container" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          {% if banners %}
+            {% for banner in banners %}
+              <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                <img src="{{banner.photo.url}}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>{{banner.title}}
+                  </h5>
+                  <p>{{banner.description}}
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions1" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions1" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>    
+</section>
+
+<section>
+  <div class='container'> 
+    <div class="card my-2">
+      <div class="card-body">
+        <form action="{% url 'property_search' %}" method="GET">
+          {% csrf_token %}
+          <div class='row mb-2 mt-0'> 
+            <div class='col'>
+              <label class="mb-1">Keywords</label>
+              <input type="text" name="keyword" class="form-control" placeholder="Keyword (Pool, Garage, etc)">
+            </div>
+            <div class='col'>
+              <label class="mb-1">City</label>
+              <input type="text" name="city" class="form-control" placeholder="City">
+            </div>
+            <div class='col'>
+              <label class="mb-1">State</label>
+              <select name="state" class="form-control">
+                <option selected="true" disabled="disabled">State (All)</option>
+                {% for key,value in state_name.items %}  
+                  <option value="{{key}}">{{value}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class='col'>
+              <label class="mb-1">Bedrooms</label>
+              <select name="bedrooms" class="form-control">
+                <option selected="true" disabled="disabled">Bedrooms (All)</option>
+                {% for key,value in bedroom_number.items %}  
+                  <option value="{{key}}">{{value}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class='col'>
+              <label class="mb-1">Price</label>
+              <select name="price" class="form-control" id="type">
+                <option selected="true" disabled="disabled">Max Price (Any)</option>
+                {% for key,value in price_range.items %}  
+                  <option value="{{key}}">{{value}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col d-grid">
+              <button class="btn btn-dark btn-block mt-4" type="submit">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+    <div class='container'> 
+        <div class='row mb-5'> 
+          {% if listings %}
+            {% for listing in listings %}
+            <div class='col-md-6 col-lg-3 mb-4'>
+              <div class="card">
+                <div class="card text-white">
+                  <img class="card-img-top" src="{{listing.photo_main.url}}">
+                  <div class="card-img-overlay">
+                    <h2>
+                      <span class="badge badge-pill bg-info text-white">Rs. {{listing.price|intcomma}}</span>
+                    </h2>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="listing-heading text-center">
+                    <h4 class="text-dark"> {{listing.title}}</h4>
+                    <p>
+                      <i class="fas fa-map-marker text-secondary"></i> {{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}</p>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-th-large"></i> Sqft: {{listing.sqft}}</div>
+                    <div class="col-6">
+                      <i class="fas fa-car"></i> Garage: {{listing.garage}}</div>
+                  </div>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-bed"></i> Bedrooms: {{listing.bedrooms}}</div>
+                    <div class="col-6">
+                      <i class="fas fa-bath"></i> Bathrooms: {{listing.bathrooms}}</div>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-user"></i> {{listing.agent.name}}</div>
+                  </div>
+                  <div class="row text-secondary pb-2">
+                    <div class="col-6">
+                      <i class="fas fa-clock"></i> {{listing.list_date|date}}</div>
+                  </div>
+                </div>
+                <a href="{% url 'property_id' listing.id %}" class="btn btn-dark btn-block">More Info</a>
+              </div>
+            </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+    </div>
+</section>
+<section>
+
+</section>
+{% endblock content%}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<section>
+  <div class="container">
+    <section id="showcase-inner" class="mt-2 text-white">
+        <div class="container">
+          <div class="row text-center text-dark">
+            <div class="col-md-12">
+              <h2 class="display-5"><strong>Your Inquiries</strong></h2>
+            </div>
+          </div>
+        </div>
+    </section>
+  </div>
+</section>
+<section>
+  <div class='container'> 
+    <div class="card my-2">
+      <div class="card-body">
+        <table class='table table-hover table-bordered table-dark'> 
+            <thead> 
+              <tr> 
+                <th scope='col'>#
+                </th> 
+                <th scope='col'>Property
+                </th>
+                <th scope='col'>Property ID.
+                </th>
+                <th scope='col'>Agent
+                </th> 
+                <th scope='col'>Date
+                </th> 
+              </tr>
+            </thead> 
+            {% if inquiries %}
+              {% for inquiry in inquiries %}
+                <tbody> 
+                  <tr> 
+                    <th scope='row'>{{forloop.counter}}
+                    </th> 
+                    <td>{{inquiry.property_name}}
+                    </td>
+                    <td>{{inquiry.id}}
+                    </td>
+                    <td>{{inquiry.agent.name}}
+                    </td>
+                    <td>{{inquiry.date_inquiry}}
+                    </td>
+                  </tr>
+                </tbody>
+              {% endfor %}
+            {% endif %}
+          </table> 
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock content%}

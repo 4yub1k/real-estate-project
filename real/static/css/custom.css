@@ -1,0 +1,70 @@
+body {
+    background-color: rgb(231, 229, 229);
+}
+/* Font Awesome */
+.fa-twitter{
+    color: black;
+    padding-right: 1rem;
+}
+.fa-facebook{
+    color: black;
+    padding-right: 1rem;
+}
+.fa-linkedin{
+    color: black;
+    padding-right: 1rem;
+}
+.fa-instagram{
+    color: black;
+}
+/* change these to tweak LOGO*/
+.navbar-brand{
+    margin-left: 5%;
+}
+.right-nav{
+    margin-right: 5%;
+}
+/*Pagination*/
+
+.pagination > li > a
+{
+    background-color: white;
+    color: black;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    background-color: white;
+    color: black;
+}
+
+.pagination > .active > a
+{
+    background-color: white;
+    color: black;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: gray;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: white;
+    background-color: black;
+    border-color: white;
+}
+/*
+.logo-image{
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+}
+.navbar-nav {
+    position: relative;
+    left: 11%; 
+} */
