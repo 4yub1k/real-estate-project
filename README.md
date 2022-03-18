@@ -18,12 +18,18 @@
    ```sh
      pip install -r requirements.txt
    ```
-3. Add SECRET_KEY (rela/settings.py)
+3. Add SECRET_KEY (real/settings.py)
    ```
    SECRET_KEY = '=========USE YOUR SECRET KEY=============' #from settings.py
    ```
-4. Run
+4. Configure
    ```
+   Configure Database 
+   Make migrations
+   ```
+5. Run
+   ```
+
    python manage.py runserver
    ```
 
